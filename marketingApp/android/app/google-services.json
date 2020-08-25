@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "750335680209",
+    "firebase_url": "https://marketingapp-3ec43.firebaseio.com",
+    "project_id": "marketingapp-3ec43",
+    "storage_bucket": "marketingapp-3ec43.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750335680209:android:70e50ce9be84b3af602ff0",
+        "android_client_info": {
+          "package_name": "com.example.marketingApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750335680209-o9vu5v6n8gjgstqs9t4u48tsqlucj9f4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTV1u6ESPdJT6ZxZuUGYG9unEywxXNIQ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750335680209-o9vu5v6n8gjgstqs9t4u48tsqlucj9f4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
