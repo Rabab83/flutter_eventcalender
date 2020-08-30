@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:marketingApp/screens/calender.dart';
+import 'package:marketingApp/ui/pages/clientpage.dart';
 import 'widgets/raisedButton.dart';
 import 'screens/clients.dart';
 import 'package:marketingApp/ui/pages/add_event.dart';
 import 'screens/employee.dart';
 import './screens/auth_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,13 +56,29 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Button(
               text: Text('Employee'),
-              navigateTo: Employee(),
+              navigateTo: StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (ctx, userSnapshot) {
+                  if (userSnapshot.hasData) {
+                    return Calender();
+                  }
+                  return AuthScreen();
+                },
+              ),
               color: Colors.pinkAccent,
               textColor: Colors.black,
             ),
             Button(
               text: Text('Client'),
-              navigateTo: AuthScreen(),
+              navigateTo: StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (ctx, userSnapshot) {
+                  if (userSnapshot.hasData) {
+                    return ClientPage();
+                  }
+                  return AuthScreen();
+                },
+              ),
               color: Colors.pinkAccent,
               textColor: Colors.black,
             ),

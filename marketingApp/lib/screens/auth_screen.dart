@@ -12,7 +12,33 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  bool _initialized = false;
+  bool _error = false;
+
+  // Define an async function to initialize FlutterFire
+  void initializeFlutterFire() async {
+    try {
+      // Wait for Firebase to initialize and set `_initialized` state to true
+      await Firebase.initializeApp();
+      setState(() {
+        _initialized = true;
+      });
+    } catch (e) {
+      // Set `_error` state to true if Firebase initialization fails
+      setState(() {
+        _error = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    initializeFlutterFire();
+    super.initState();
+  }
+
   FirebaseAuth _auth = FirebaseAuth.instance;
+  var _isLoading = false;
   void _submitAuthForm(
     String email,
     String password,
@@ -22,6 +48,9 @@ class _AuthScreenState extends State<AuthScreen> {
   ) async {
     UserCredential authResult;
     try {
+      setState(() {
+        _isLoading = true;
+      });
       if (isLogin) {
         authResult = await _auth.signInWithEmailAndPassword(
             email: email, password: password);
@@ -31,8 +60,8 @@ class _AuthScreenState extends State<AuthScreen> {
       }
       await FirebaseFirestore.instance
           .collection('users')
-          .document(authResult.user.uid)
-          .setData({
+          .doc(authResult.user.uid)
+          .set({
         'username': username,
         'email': email,
       }); //only after siging up
@@ -48,8 +77,14 @@ class _AuthScreenState extends State<AuthScreen> {
           backgroundColor: Theme.of(ctx).errorColor,
         ),
       );
+      setState(() {
+        _isLoading = true;
+      });
     } catch (err) {
       print(err);
+      setState(() {
+        _isLoading = true;
+      });
     }
   }
 
@@ -57,7 +92,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      body: AuthForm(_submitAuthForm),
+      body: AuthForm(_submitAuthForm, _isLoading),
     );
   }
 }
