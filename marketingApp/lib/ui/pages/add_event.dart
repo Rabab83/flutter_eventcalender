@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:marketingApp/model/event.dart';
 import 'package:flutter/material.dart';
 import 'package:marketingApp/res/event_firestore_service.dart';
