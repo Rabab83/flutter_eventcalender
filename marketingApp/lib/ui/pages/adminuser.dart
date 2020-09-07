@@ -11,8 +11,8 @@ class AdminUser extends StatelessWidget {
       appBar: AppBar(
         title: Text('Action Breif'),
       ),
-      body: StreamBuilder(
-        stream: FirestoreService().getNotes(),
+      body: FutureBuilder(
+        future: FirestoreService().getNotes(),
         builder: (BuildContext context, AsyncSnapshot<List<Note>> snapshot) {
           if (snapshot.hasError || !snapshot.hasData)
             return CircularProgressIndicator();

@@ -4,7 +4,7 @@ import 'package:marketingApp/model/note.dart';
 class FirestoreService {
   static final FirestoreService _firestoreService =
       FirestoreService._internal();
-  Firestore _db = Firestore.instance;
+  FirebaseFirestore _db = FirebaseFirestore.instance;
 
   FirestoreService._internal();
 
@@ -12,14 +12,11 @@ class FirestoreService {
     return _firestoreService;
   }
 
-  Stream<List<Note>> getNotes() {
-    return _db.collection('notes').snapshots().map(
-          (snapshot) => snapshot.documents
-              .map(
-                (doc) => Note.fromMap(doc.data, doc.documentID),
-              )
-              .toList(),
-        );
+  Future<List<Note>> getNotes() async {
+    var snap = await _db.collection('notes').get();
+    return snap.docs
+        .map((doc) => new Note.fromMap(doc.data(), doc.id))
+        .toList();
   }
 
   Future<void> addNote(Note note) {
@@ -27,10 +24,10 @@ class FirestoreService {
   }
 
   Future<void> deleteNote(String id) {
-    return _db.collection('notes').document(id).delete();
+    return _db.collection('notes').doc(id).delete();
   }
 
   Future<void> updateNote(Note note) {
-    return _db.collection('notes').document(note.id).updateData(note.toMap());
+    return _db.collection('notes').doc(note.id).updateData(note.toMap());
   }
 }
