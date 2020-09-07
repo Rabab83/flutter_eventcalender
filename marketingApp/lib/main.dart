@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketingApp/screens/calender.dart';
+import 'package:marketingApp/ui/pages/adminPage.dart';
 import 'package:marketingApp/ui/pages/adminuser.dart';
 import 'package:marketingApp/ui/pages/clientpage.dart';
 import 'package:marketingApp/widgets/auth/auth_form.dart';
@@ -56,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, userSnapshot) {
           if (userSnapshot.hasData) {
-            return AdminUser();
+            return AdminPage();
           }
           return AuthScreen();
         },

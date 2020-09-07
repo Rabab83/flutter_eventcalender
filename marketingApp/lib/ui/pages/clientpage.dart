@@ -7,7 +7,6 @@ class ClientPage extends StatefulWidget {
 
 class _ClientPageState extends State<ClientPage> {
   TextEditingController name;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +70,7 @@ class _ClientPageState extends State<ClientPage> {
                       ),
                     ),
                   ),
-                  
+
                   Container(
                       margin: EdgeInsets.all(5),
                       child: Row(
