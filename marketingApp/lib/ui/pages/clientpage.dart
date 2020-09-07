@@ -71,16 +71,7 @@ class _ClientPageState extends State<ClientPage> {
                       ),
                     ),
                   ),
-                  // Container(
-                  //   margin: EdgeInsets.all(5),
-                  //   child: TextField(
-                  //     obscureText: true,
-                  //     decoration: InputDecoration(
-                  //       border: OutlineInputBorder(),
-                  //       labelText: 'Existing Brand Guidelines in place ?',
-                  //     ),
-                  //   ),
-                  // ),
+                  
                   Container(
                       margin: EdgeInsets.all(5),
                       child: Row(

@@ -19,7 +19,7 @@ class EventDetailsPage extends StatelessWidget {
           children: <Widget>[
             Text(
               event.title,
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
             SizedBox(height: 20.0),
             Text(event.description)

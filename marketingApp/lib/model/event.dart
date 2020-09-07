@@ -5,8 +5,10 @@ class EventModel extends DatabaseItem {
   final String title;
   final String description;
   final DateTime eventDate;
+  final String userId;
 
-  EventModel({this.id, this.title, this.description, this.eventDate})
+  EventModel(
+      {this.id, this.title, this.description, this.eventDate, this.userId})
       : super(id);
 
   factory EventModel.fromMap(Map data) {

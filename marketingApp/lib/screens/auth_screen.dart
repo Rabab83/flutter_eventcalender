@@ -6,6 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+class User {
+  User({@required this.uid});
+  final String uid;
+}
+
 class AuthScreen extends StatefulWidget {
   @override
   _AuthScreenState createState() => _AuthScreenState();
@@ -38,6 +43,11 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   FirebaseAuth _auth = FirebaseAuth.instance;
+  // GET UID
+  Future<String> getCurrentUID() async {
+    return _auth.currentUser.uid;
+  }
+
   var _isLoading = false;
   void _submitAuthForm(
     String email,
