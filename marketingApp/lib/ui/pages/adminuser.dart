@@ -9,7 +9,7 @@ class AdminUser extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Action Breif'),
+        title: Text('Account Breif'),
       ),
       body: FutureBuilder(
         future: FirestoreService().getNotes(),

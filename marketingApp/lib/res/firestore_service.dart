@@ -28,6 +28,6 @@ class FirestoreService {
   }
 
   Future<void> updateNote(Note note) {
-    return _db.collection('notes').doc(note.id).updateData(note.toMap());
+    return _db.collection('notes').doc(note.id).update(note.toMap());
   }
 }

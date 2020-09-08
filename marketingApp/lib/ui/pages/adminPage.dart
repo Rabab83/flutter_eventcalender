@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:marketingApp/widgets/raisedButton.dart';
-import 'package:marketingApp/widgets/raisedButton.dart';
 
 import 'adminuser.dart';
 
@@ -28,7 +27,7 @@ class _AdminPageState extends State<AdminPage> {
                     context,
                     MaterialPageRoute(builder: (context) => AdminUser()),
                   ),
-                  child: Text('Action Breif', style: TextStyle(fontSize: 20)),
+                  child: Text('Account Breif', style: TextStyle(fontSize: 20)),
                 ),
               ),
             ])),
