@@ -2,5 +2,16 @@ import 'package:flutter/cupertino.dart';
 
 class User {
   String uid;
-  User(@required this.uid);
+  String role;
+  User({
+    @required this.uid,
+    @required this.role,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      "uid": uid,
+      "role": role,
+    };
+  }
 }

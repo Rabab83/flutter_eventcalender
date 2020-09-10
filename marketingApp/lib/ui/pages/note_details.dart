@@ -20,7 +20,7 @@ class NoteDetailsPage extends StatelessWidget {
               note.title,
               style: Theme.of(context)
                   .textTheme
-                  .title
+                  .headline6
                   .copyWith(fontWeight: FontWeight.bold, fontSize: 20.0),
             ),
             const SizedBox(height: 20.0),

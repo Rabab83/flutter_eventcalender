@@ -14,6 +14,9 @@ class _AdminPageState extends State<AdminPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Admin Page'),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.logout), onPressed: () {})
+        ],
       ),
       body: Container(
         child: ListView(
@@ -27,7 +30,7 @@ class _AdminPageState extends State<AdminPage> {
                     context,
                     MaterialPageRoute(builder: (context) => AdminUser()),
                   ),
-                  child: Text('Account Breif', style: TextStyle(fontSize: 20)),
+                  child: Text('Add Project', style: TextStyle(fontSize: 20)),
                 ),
               ),
             ])),
