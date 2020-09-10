@@ -1,8 +1,12 @@
+import 'dart:html';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:marketingApp/screens/calender.dart';
 import 'package:marketingApp/ui/pages/adminPage.dart';
 import 'package:marketingApp/ui/pages/adminuser.dart';
 import 'package:marketingApp/ui/pages/clientpage.dart';
+import 'package:marketingApp/ui/pages/note_details.dart';
 import 'package:marketingApp/widgets/auth/auth_form.dart';
 import 'package:provider/provider.dart';
 import 'widgets/raisedButton.dart';
@@ -55,15 +59,22 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (ctx, userSnapshot) {
-          if (userSnapshot.hasData) {
-            return AdminPage();
+        builder: (ctx, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Calender();
           }
           return AuthScreen();
         },
       ),
     );
   }
+}
 
-  Provider buildProvider() => Provider<Database>(create: null);
+Widget checkRole(DocumentSnapshot snapshot) {
+  if (snapshot.data['role'] == 'admin')
+    return AdminPage();
+  else if (snapshot.data['role'] == 'employee')
+    return Employee();
+  else
+    return NoteDetailsPage(note: );
 }
