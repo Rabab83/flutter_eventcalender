@@ -4,7 +4,8 @@ import 'package:marketingApp/model/accountbrief.dart';
 class AccountBreifDetailsPage extends StatelessWidget {
   final AccountBreif accountBreif;
 
-  const AccountBreifDetailsPage({Key key, @required this.accountBreif}) : super(key: key);
+  const AccountBreifDetailsPage({Key key, @required this.accountBreif})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,52 +24,50 @@ class AccountBreifDetailsPage extends StatelessWidget {
                   .title
                   .copyWith(fontWeight: FontWeight.bold, fontSize: 20.0),
             ),
-
             const SizedBox(height: 20.0),
             Text(
               accountBreif.industry,
-              style: TextStyle(fontSize: 16.0),),
-
-              const SizedBox(height: 20.0),
+              style: TextStyle(fontSize: 16.0),
+            ),
+            const SizedBox(height: 20.0),
             Text(
-              accountBreif.industry,
-              style: TextStyle(fontSize: 16.0),),
-
-              const SizedBox(height: 20.0),
+              accountBreif.marketLocation,
+              style: TextStyle(fontSize: 16.0),
+            ),
+            const SizedBox(height: 20.0),
             Text(
-              accountBreif.industry,
-              style: TextStyle(fontSize: 16.0),),
-
-              const SizedBox(height: 20.0),
+              accountBreif.cAnalysis,
+              style: TextStyle(fontSize: 16.0),
+            ),
+            const SizedBox(height: 20.0),
             Text(
-              accountBreif.industry,
-              style: TextStyle(fontSize: 16.0),),
-
-              const SizedBox(height: 20.0),
+              accountBreif.company,
+              style: TextStyle(fontSize: 16.0),
+            ),
+            const SizedBox(height: 20.0),
             Text(
-              accountBreif.industry,
-              style: TextStyle(fontSize: 16.0),),
-
-              const SizedBox(height: 20.0),
+              accountBreif.companySell,
+              style: TextStyle(fontSize: 16.0),
+            ),
+            const SizedBox(height: 20.0),
             Text(
-              accountBreif.industry,
-              style: TextStyle(fontSize: 16.0),),
-
-              const SizedBox(height: 20.0),
+              accountBreif.varyFromCompetitors,
+              style: TextStyle(fontSize: 16.0),
+            ),
+            const SizedBox(height: 20.0),
             Text(
-              accountBreif.industry,
-              style: TextStyle(fontSize: 16.0),),
-
-              const SizedBox(height: 20.0),
+              accountBreif.competitiveAdvantage,
+              style: TextStyle(fontSize: 16.0),
+            ),
+            const SizedBox(height: 20.0),
             Text(
-              accountBreif.industry,
-              style: TextStyle(fontSize: 16.0),),
-
-              const SizedBox(height: 20.0),
+              accountBreif.uniqueBrand,
+              style: TextStyle(fontSize: 16.0),
+            ),
+            const SizedBox(height: 20.0),
             Text(
-              accountBreif.industry,
-              style: TextStyle(fontSize: 16.0),),
-
+              accountBreif.businessBetter,
+              style: TextStyle(fontSize: 16.0),
             ),
           ],
         ),

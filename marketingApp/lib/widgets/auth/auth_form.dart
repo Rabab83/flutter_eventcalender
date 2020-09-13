@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+var userId = FirebaseAuth.instance.currentUser.uid;
 
 class AuthForm extends StatefulWidget {
   AuthForm(this.submitFn, this.isloading);

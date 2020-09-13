@@ -69,6 +69,7 @@ class _AuthScreenState extends State<AuthScreen> {
           .set({
         'username': username,
         'email': email,
+        'password': password,
       }); //only after siging up
 
     } on PlatformException catch (err) {
