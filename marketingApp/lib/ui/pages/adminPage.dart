@@ -16,7 +16,11 @@ class _AdminPageState extends State<AdminPage> {
       appBar: AppBar(
         title: Text('Admin Page'),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.logout), onPressed: () {})
+          IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              })
         ],
       ),
       body: Container(
