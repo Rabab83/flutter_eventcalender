@@ -1,36 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:marketingApp/model/accountbrief.dart';
 
-class DatabasesService {
-  static final DatabasesService _firestoreService =
-      DatabasesService._internal();
+class DataService {
+  static final DataService _dataService = DataService._internal();
   FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  DatabasesService._internal();
+  DataService._internal();
 
-  factory DatabasesService() {
-    return _firestoreService;
+  factory DataService() {
+    return _dataService;
   }
 
   Future<List<AccountBreif>> getAccountBreif() async {
-    var snap = await _db.collection('accountbreif').get();
+    var snap = await _db.collection('accountBreifs').get();
     return snap.docs
         .map((doc) => new AccountBreif.fromMap(doc.data(), doc.id))
         .toList();
   }
 
-  Future<void> addAccountBreif(AccountBreif accountbreif) {
-    return _db.collection('accountbreif').add(accountbreif.toMap());
+  Future<void> addAccountBreif(AccountBreif accountBreif) {
+    return _db.collection('accountBreifs').add(accountBreif.toMap());
   }
 
   Future<void> deleteAccountBreif(String id) {
-    return _db.collection('accountbreif').doc(id).delete();
+    return _db.collection('accountBreifs').doc(id).delete();
   }
 
-  Future<void> updateAccountBreif(AccountBreif accountbreif) {
+  Future<void> updateAccountBreif(AccountBreif accountBreif) {
     return _db
-        .collection('accountbreif')
-        .doc(accountbreif.id)
-        .update(accountbreif.toMap());
+        .collection('accountBreifs')
+        .doc(accountBreif.id)
+        .update(accountBreif.toMap());
   }
 }

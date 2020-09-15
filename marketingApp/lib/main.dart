@@ -2,18 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:marketingApp/screens/calender.dart';
 import 'package:marketingApp/ui/pages/adminPage.dart';
-// import 'package:marketingApp/ui/pages/adminuser.dart';
 import 'package:marketingApp/ui/pages/clientpage.dart';
 import 'package:marketingApp/ui/pages/note_details.dart';
 import 'package:marketingApp/widgets/auth/auth_form.dart';
 import 'widgets/raisedButton.dart';
-import 'screens/clients.dart';
 import 'package:marketingApp/ui/pages/add_event.dart';
 import 'screens/employee.dart';
 import './screens/auth_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:marketingApp/res/database.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,10 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('users')
-            .doc(userId)
-            .snapshots(),
+        stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             checkRole(snapshot.data);

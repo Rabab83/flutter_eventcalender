@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:marketingApp/model/event.dart';
 import 'package:flutter/material.dart';
 import 'package:marketingApp/res/event_firestore_service.dart';
@@ -17,6 +16,7 @@ class _AddEventPageState extends State<AddEventPage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   TextEditingController _title;
   TextEditingController _description;
+  TextEditingController _email;
   DateTime _eventDate;
   final _formKey = GlobalKey<FormState>();
   final _key = GlobalKey<ScaffoldState>();
@@ -50,6 +50,8 @@ class _AddEventPageState extends State<AddEventPage> {
     _description = TextEditingController(
         text: widget.note != null ? widget.note.description : "");
     _eventDate = DateTime.now();
+    _email = TextEditingController(
+        text: widget.note != null ? widget.note.email : "");
     processing = false;
   }
 
@@ -57,7 +59,7 @@ class _AddEventPageState extends State<AddEventPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.note != null ? "Edit Note" : "Add note"),
+        title: Text(widget.note != null ? "Edit Event" : "Add Event"),
       ),
       key: _key,
       body: Form(
@@ -117,6 +119,22 @@ class _AddEventPageState extends State<AddEventPage> {
                 },
               ),
               SizedBox(height: 10.0),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: TextFormField(
+                  controller: _email,
+                  validator: (value) =>
+                      (value.isEmpty) ? "Email can't be empty" : null,
+                  style: style,
+                  decoration: InputDecoration(
+                      labelText: "Email",
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                ),
+              ),
               processing
                   ? Center(child: CircularProgressIndicator())
                   : Padding(
@@ -135,13 +153,18 @@ class _AddEventPageState extends State<AddEventPage> {
                                 await eventDBS.updateData(widget.note.id, {
                                   "title": _title.text,
                                   "description": _description.text,
-                                  "event_date": widget.note.eventDate
+                                  "event_date": widget.note.eventDate,
+                                  "email": _email.text,
                                 });
                               } else {
-                                await eventDBS.createItem(EventModel(
+                                await eventDBS.createItem(
+                                  EventModel(
                                     title: _title.text,
                                     description: _description.text,
-                                    eventDate: _eventDate));
+                                    eventDate: _eventDate,
+                                    email: _email.text,
+                                  ),
+                                );
                               }
                               Navigator.pop(context);
                               setState(() {
@@ -169,6 +192,7 @@ class _AddEventPageState extends State<AddEventPage> {
   void dispose() {
     _title.dispose();
     _description.dispose();
+    _email.dispose();
     super.dispose();
   }
 }

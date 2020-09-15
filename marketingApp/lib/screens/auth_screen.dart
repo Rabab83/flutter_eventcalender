@@ -59,6 +59,7 @@ class _AuthScreenState extends State<AuthScreen> {
       if (isLogin) {
         authResult = await _auth.signInWithEmailAndPassword(
             email: email, password: password);
+        _isLoading = false;
       } else {
         authResult = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
@@ -71,7 +72,7 @@ class _AuthScreenState extends State<AuthScreen> {
         'email': email,
         'password': password,
       }); //only after siging up
-
+      _isLoading = false;
     } on PlatformException catch (err) {
       var message = 'please check your credentials';
       if (err.message != null) {
