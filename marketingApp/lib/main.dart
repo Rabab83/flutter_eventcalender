@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:marketingApp/model/user.dart';
 import 'package:marketingApp/screens/calender.dart';
+import 'package:marketingApp/screens/dashBoard.dart';
 import 'package:marketingApp/ui/pages/adminPage.dart';
 import 'package:marketingApp/ui/pages/clientpage.dart';
 import 'package:marketingApp/ui/pages/note_details.dart';
@@ -17,8 +19,6 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MyApp());
 }
-
-var userId = FirebaseAuth.instance.currentUser.uid;
 
 class MyApp extends StatelessWidget {
   @override
@@ -53,24 +53,25 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (ctx, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            checkRole(snapshot.data);
-          }
-          return AuthScreen();
-        },
-      ),
+      body: AdminPage(),
     );
   }
 }
 
-Widget checkRole(DocumentSnapshot snapshot) {
-  if (snapshot.data()['role'] == 'admin')
-    return Calender();
-  else if (snapshot.data()['role'] == 'employee')
-    return Employee();
-  else
-    return ClientPage();
-}
+//StreamBuilder(
+//      stream: FirebaseAuth.instance.authStateChanges(),
+//    builder: (ctx, snapshot) {
+//    if (snapshot.connectionState == ConnectionState.done) {
+//    return DashBoardPage();
+//}
+//return AuthScreen();
+//},
+//),
+
+//authorizeAccess(BuildContext context) {
+//var userId = FirebaseAuth.instance.currentUser.uid;
+//FirebaseFirestore.instance.collection('users').doc(userId).snapshots();
+
+//if (snapshot.data()['role'] == 'admin') {
+
+//}

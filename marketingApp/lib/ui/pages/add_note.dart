@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketingApp/model/note.dart';
 import 'package:marketingApp/res/firestore_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AddNotePage extends StatefulWidget {
   final Note note;
@@ -75,17 +76,20 @@ class _AddNotePageState extends State<AddNotePage> {
                 onPressed: () async {
                   if (_key.currentState.validate()) {
                     try {
+                      final userId = FirebaseAuth.instance.currentUser.uid;
                       if (isEditMote) {
                         Note note = Note(
                           description: _descriptionController.text,
                           title: _titleController.text,
                           id: widget.note.id,
+                          userId: userId,
                         );
                         await FirestoreService().updateNote(note);
                       } else {
                         Note note = Note(
                           description: _descriptionController.text,
                           title: _titleController.text,
+                          userId: userId,
                         );
                         await FirestoreService().addNote(note);
                       }

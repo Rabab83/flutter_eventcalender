@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:marketingApp/model/accountbrief.dart';
-import 'package:marketingApp/res/database.dart';
-import 'package:marketingApp/ui/pages/accountBreif_details.dart';
-import 'package:marketingApp/ui/pages/add_accountBreif.dart';
+import 'package:marketingApp/model/note.dart';
+import 'package:marketingApp/res/firestore_service.dart';
 import 'package:marketingApp/ui/pages/add_note.dart';
+import 'package:marketingApp/ui/pages/note_details.dart';
 
-//Displays names of account Breifs
-class AdminUser extends StatelessWidget {
+//Displays names of Notes
+class AddingNotesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Account Breif'),
+        title: Text('Note'),
       ),
       body: FutureBuilder(
-        future: DataService().getAccountBreif(),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<AccountBreif>> snapshot) {
+        future: FirestoreService().getNotes(),
+        builder: (BuildContext context, AsyncSnapshot<List<Note>> snapshot) {
           if (snapshot.hasError || !snapshot.hasData)
             return CircularProgressIndicator();
           return ListView.builder(
             itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
-              AccountBreif accountBreif = snapshot.data[index];
+              Note note = snapshot.data[index];
               return ListTile(
-                title: Text(accountBreif.name),
-                subtitle: Text(accountBreif.email),
+                title: Text(note.title),
+                subtitle: Text(note.description),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -35,23 +33,21 @@ class AdminUser extends StatelessWidget {
                       onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) =>
-                                AddAccountBreifPage(accountBreif: accountBreif),
+                            builder: (_) => AddNotePage(note: note),
                           )),
                     ),
                     IconButton(
                       color: Colors.red,
                       icon: Icon(Icons.delete),
-                      onPressed: () =>
-                          _deleteAccountBreif(context, accountBreif.id),
+                      onPressed: () => _deleteNote(context, note.id),
                     ),
                   ],
                 ),
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => AccountBreifDetailsPage(
-                      accountBreif: accountBreif,
+                    builder: (_) => NoteDetailsPage(
+                      note: note,
                     ),
                   ),
                 ),
@@ -63,17 +59,17 @@ class AdminUser extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => AddAccountBreifPage()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => AddNotePage()));
         },
       ),
     );
   }
 
-  void _deleteAccountBreif(BuildContext context, String id) async {
+  void _deleteNote(BuildContext context, String id) async {
     if (await _showConfirmationDialog(context)) {
       try {
-        await DataService().deleteAccountBreif(id);
+        await FirestoreService().deleteNote(id);
       } catch (e) {
         print(e);
       }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marketingApp/screens/calender.dart';
+import 'package:marketingApp/ui/pages/addingNotesPage.dart';
 import 'package:marketingApp/ui/pages/adminuser.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AdminPage extends StatefulWidget {
   @override
@@ -28,10 +30,10 @@ class _AdminPageState extends State<AdminPage> {
                     child: RaisedButton(
                       onPressed: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AdminUser()),
+                        MaterialPageRoute(
+                            builder: (context) => AddingNotesPage()),
                       ),
-                      child: Text('Add Account Breif',
-                          style: TextStyle(fontSize: 20)),
+                      child: Text('Add Note', style: TextStyle(fontSize: 20)),
                     ),
                   ),
                   const SizedBox(height: 20.0),
