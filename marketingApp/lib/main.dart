@@ -53,20 +53,18 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: AdminPage(),
+      body: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (ctx, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return DashBoardPage();
+          }
+          return AuthScreen();
+        },
+      ),
     );
   }
 }
-
-//StreamBuilder(
-//      stream: FirebaseAuth.instance.authStateChanges(),
-//    builder: (ctx, snapshot) {
-//    if (snapshot.connectionState == ConnectionState.done) {
-//    return DashBoardPage();
-//}
-//return AuthScreen();
-//},
-//),
 
 //authorizeAccess(BuildContext context) {
 //var userId = FirebaseAuth.instance.currentUser.uid;

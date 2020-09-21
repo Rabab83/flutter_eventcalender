@@ -10,7 +10,7 @@ class DashBoardPage extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-//            header
+            // header
             new UserAccountsDrawerHeader(
               accountName: Text('Adel Shakel'),
               accountEmail: Text('Admin@gammal.tech'),

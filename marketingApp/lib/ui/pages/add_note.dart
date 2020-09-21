@@ -33,7 +33,7 @@ class _AddNotePageState extends State<AddNotePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(isEditMote ? 'Edit Note' : 'Add Note'),
+        title: Text(isEditMote ? 'Edit Note Page' : 'Add Note page'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
