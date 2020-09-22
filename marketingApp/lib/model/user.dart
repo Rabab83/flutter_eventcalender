@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
-class User {
+class Users {
   String uid;
   String role;
-  User({
+  Users({
     @required this.uid,
     @required this.role,
   });

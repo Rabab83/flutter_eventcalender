@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:marketingApp/screens/employee.dart';
 import 'package:marketingApp/ui/pages/adminPage.dart';
 import 'package:marketingApp/ui/pages/clientpage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DashBoardPage extends StatelessWidget {
+  FirebaseAuth fAuth = FirebaseAuth.instance;
+  FirebaseFirestore fStore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,16 +28,20 @@ class DashBoardPage extends StatelessWidget {
                   ),
                 ),
               ),
-              decoration: new BoxDecoration(color: Colors.blue),
+              decoration: new BoxDecoration(color: Colors.pink),
             ),
             ListTile(
               title: Text('Admin page'),
               leading: Icon(Icons.home),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AdminPage()),
-                );
+                final userId = fAuth.currentUser.uid;
+                fStore.collection('users').doc(userId).get().then((snapshot) =>
+                    snapshot.data()['role'] == "admin"
+                        ? Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AdminPage()))
+                        : Text("you are not allowed"));
               },
             ),
             ListTile(
@@ -71,7 +80,7 @@ class DashBoardPage extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.pinkAccent,
         title: Text(
           'Marketiong App',
           style: TextStyle(color: Colors.white),

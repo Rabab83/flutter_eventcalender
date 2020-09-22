@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:marketingApp/model/user.dart';
 import 'package:marketingApp/screens/calender.dart';
@@ -56,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.connectionState == ConnectionState.active) {
             return DashBoardPage();
           }
           return AuthScreen();
