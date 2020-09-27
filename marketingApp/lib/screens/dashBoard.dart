@@ -47,10 +47,14 @@ class DashBoardPage extends StatelessWidget {
               title: Text('Employee'),
               leading: Icon(Icons.work),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Employee()),
-                );
+                final userId = fAuth.currentUser.uid;
+                fStore.collection('users').doc(userId).get().then((snapshot) =>
+                    snapshot.data()['role'] == "employee"||snapshot.data()['role'] =="admin"
+                        ? Navigator.push(context,
+                            MaterialPageRoute(
+                                builder: (context) => AdminPage()))
+                        : Text("you are not allowed to enter this page"));
+                
               },
             ),
             ListTile(
@@ -95,7 +99,7 @@ class DashBoardPage extends StatelessWidget {
             margin: const EdgeInsets.all(15),
             child: Text(
               'The best place to Market your Business.',
-              style: TextStyle(fontSize: 22.0, color: Colors.teal),
+              style: TextStyle(fontSize: 22.0, color: Colors.pinkAccent),
             ),
           ),
         ]),
