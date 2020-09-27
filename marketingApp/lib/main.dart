@@ -1,17 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:marketingApp/model/user.dart';
-import 'package:marketingApp/screens/calender.dart';
-import 'package:marketingApp/screens/dashBoard.dart';
-import 'package:marketingApp/ui/pages/adminPage.dart';
-import 'package:marketingApp/ui/pages/clientpage.dart';
-import 'package:marketingApp/ui/pages/note_details.dart';
-import 'package:marketingApp/widgets/auth/auth_form.dart';
-import 'widgets/raisedButton.dart';
-import 'package:marketingApp/ui/pages/add_event.dart';
-import 'screens/employee.dart';
-import './screens/auth_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:marketingApp/services/auth.dart';
+import 'app/landing_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,52 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Marketing App'),
-      routes: {
-        "add_event": (_) => AddEventPage(),
-      },
-    );
+        title: 'Marketing App',
+        home: LandingPage(
+          auth: Auth(),
+        ));
   }
 }
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (ctx, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            return DashBoardPage();
-          }
-          return AuthScreen();
-        },
-      ),
-    );
-  }
-}
-
-//authorizeAccess(BuildContext context) {
-//var userId = FirebaseAuth.instance.currentUser.uid;
-//FirebaseFirestore.instance.collection('users').doc(userId).snapshots();
-
-//if (snapshot.data()['role'] == 'admin') {
-
-//}

@@ -17,7 +17,7 @@ class DashBoardPage extends StatelessWidget {
           children: <Widget>[
             // header
             new UserAccountsDrawerHeader(
-              accountName: Text('Adel Shakel'),
+              accountName: Text('Mammdouh'),
               accountEmail: Text('Admin@gammal.tech'),
               currentAccountPicture: GestureDetector(
                 child: new CircleAvatar(
@@ -37,11 +37,10 @@ class DashBoardPage extends StatelessWidget {
                 final userId = fAuth.currentUser.uid;
                 fStore.collection('users').doc(userId).get().then((snapshot) =>
                     snapshot.data()['role'] == "admin"
-                        ? Navigator.push(
-                            context,
+                        ? Navigator.push(context,
                             MaterialPageRoute(
                                 builder: (context) => AdminPage()))
-                        : Text("you are not allowed"));
+                        : Text("you are not allowed to enter this page"));
               },
             ),
             ListTile(
@@ -89,7 +88,7 @@ class DashBoardPage extends StatelessWidget {
       body: Center(
         child: Column(children: <Widget>[
           Image.network(
-              'https://images-platform.99static.com/shG9KEG5KMMiWXOQoqcA_zTYH4E=/298x81:1203x986/500x500/top/smart/99designs-contests-attachments/100/100532/attachment_100532829.jpg',
+              'https://www.intandemcommunications.co.uk/wp-content/uploads/2019/08/What-is-marketing-500x333.jpg',
               fit: BoxFit.fitWidth,
               width: 500),
           Container(
