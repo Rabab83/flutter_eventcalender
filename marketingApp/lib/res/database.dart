@@ -19,7 +19,7 @@ class DataService {
   }
 
   Future<void> addAccountBreif(AccountBreif accountBreif) {
-    return _db.collection('accountBreifs').add(accountBreif.toMap());
+    return _db.collection('accountBreifs').doc(accountBreif.email).set(accountBreif.toMap());
   }
 
   Future<void> deleteAccountBreif(String id) {

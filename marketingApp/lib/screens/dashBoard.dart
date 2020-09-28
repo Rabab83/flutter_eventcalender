@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketingApp/screens/employee.dart';
 import 'package:marketingApp/ui/pages/adminPage.dart';
+import 'package:marketingApp/ui/pages/adminUser.dart';
 import 'package:marketingApp/ui/pages/clientpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,7 +40,7 @@ class DashBoardPage extends StatelessWidget {
                     snapshot.data()['role'] == "admin"
                         ? Navigator.push(context,
                             MaterialPageRoute(
-                                builder: (context) => AdminPage()))
+                                builder: (context) => AdminUser()))
                         : Text("you are not allowed to enter this page"));
               },
             ),
@@ -52,10 +53,9 @@ class DashBoardPage extends StatelessWidget {
                     snapshot.data()['role'] == "employee"||snapshot.data()['role'] =="admin"
                         ? Navigator.push(context,
                             MaterialPageRoute(
-                                builder: (context) => AdminPage()))
+                                builder: (context) => Employee()))
                         : Text("you are not allowed to enter this page"));
-                
-              },
+                      },
             ),
             ListTile(
               title: Text('Client'),

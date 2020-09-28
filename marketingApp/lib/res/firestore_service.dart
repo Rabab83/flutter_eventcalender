@@ -8,7 +8,7 @@ import 'package:marketingApp/model/note.dart';
 class FirestoreService {
   static final FirestoreService _firestoreService =
       FirestoreService._internal();
-  FirebaseFirestore _db = FirebaseFirestore.instance;
+      FirebaseFirestore _db = FirebaseFirestore.instance;
 
   FirestoreService._internal();
 

@@ -82,15 +82,15 @@ class _AddAccountBreifPageState extends State<AddAccountBreifPage> {
                     try {
                       if (isEditMote) {
                         AccountBreif acccountBreif = AccountBreif(
-                          email: _emailController.text,
-                          name: _nameController.text,
+                          email: _emailController.text.trim(),
+                          name: _nameController.text.trim(),
                           id: widget.accountBreif.id,
                         );
                         await DataService().updateAccountBreif(acccountBreif);
                       } else {
                         AccountBreif acccountBreif = AccountBreif(
-                          email: _emailController.text,
-                          name: _nameController.text,
+                          email: _emailController.text.trim(),
+                          name: _nameController.text.trim(),
                         );
                         await DataService().addAccountBreif(acccountBreif);
                       }
