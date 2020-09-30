@@ -13,7 +13,7 @@ class _EmployeeState extends State<Employee> {
   Widget build(BuildContext context) {
     return Scaffold(
           appBar: AppBar(
-        title: Text('Admin Page'),
+        title: Text('Employee Page'),
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.logout),

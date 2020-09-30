@@ -1,3 +1,5 @@
+
+
 class AccountBreif {
   final String name;
   final String email;
@@ -9,6 +11,11 @@ class AccountBreif {
       : name = data["name"],
         email = data['email'],
         id = id;
+
+  AccountBreif.fromOneMap(Map<String, dynamic> data, String id)
+        : name = data["name"],
+          email = data['email'],
+          id = id;
 
   Map<String, dynamic> toMap() {
     return {

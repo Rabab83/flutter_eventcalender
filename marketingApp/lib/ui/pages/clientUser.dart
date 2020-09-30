@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:marketingApp/model/accountbrief.dart';
 import 'package:marketingApp/res/database.dart';
@@ -5,7 +6,8 @@ import 'package:marketingApp/ui/pages/accountBreif_details.dart';
 import 'package:marketingApp/ui/pages/add_accountBreif.dart';
 
 //Displays names of account Breifs
-class AdminUser extends StatelessWidget {
+class ClientUser extends StatelessWidget {
+  AccountBreif accountBreif;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,22 +15,19 @@ class AdminUser extends StatelessWidget {
         title: Text('Account Breif'),
       ),
       body: FutureBuilder(
-        future: DataService().getAccountBreif(),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<AccountBreif>> snapshot) {
+        future: DataService().getOneAccountBreif(accountBreif.id),
+        builder: (BuildContext context,
+            AsyncSnapshot<Map<String, dynamic>> snapshot) {
+          print(snapshot);
           if (snapshot.hasError || !snapshot.hasData)
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           return ListView.builder(
             itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
-              AccountBreif accountBreif = snapshot.data[index];
+              var accountBreif = snapshot;
               return ListTile(
-                title: Text(accountBreif.name == null
-                    ? "name is null"
-                    : accountBreif.name),
-                subtitle: Text(accountBreif.email == null
-                    ? "name is null"
-                    : accountBreif.email),
+                title: Text(accountBreif.data['name']),
+                subtitle: Text(accountBreif.data['email']),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -39,14 +38,14 @@ class AdminUser extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (_) =>
-                                AddAccountBreifPage(accountBreif: accountBreif),
+                                AddAccountBreifPage(),
                           )),
                     ),
                     IconButton(
                       color: Colors.red,
                       icon: Icon(Icons.delete),
-                      onPressed: () =>
-                          _deleteAccountBreif(context, accountBreif.id),
+                      onPressed: () {_deleteAccountBreif(context, accountBreif.id),}
+                           
                     ),
                   ],
                 ),
@@ -54,7 +53,7 @@ class AdminUser extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (_) => AccountBreifDetailsPage(
-                      accountBreif: accountBreif,
+                       accountBreif: accountBreif,
                     ),
                   ),
                 ),

@@ -3,6 +3,7 @@ import 'package:marketingApp/screens/calender.dart';
 import 'package:marketingApp/ui/pages/addingNotesPage.dart';
 import 'package:marketingApp/ui/pages/adminuser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:marketingApp/ui/pages/clientUser.dart';
 
 class AdminPage extends StatefulWidget {
   @override
@@ -35,7 +36,7 @@ class _AdminPageState extends State<AdminPage> {
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AddingNotesPage()),
+                            builder: (context) => ClientUser()),
                       ),
                       child: Text('Add Note', style: TextStyle(fontSize: 20)),
                     ),

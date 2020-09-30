@@ -18,8 +18,16 @@ class DataService {
         .toList();
   }
 
+  Future<Map<String,dynamic>> getOneAccountBreif(String id) async {
+    var snap = await _db.collection('accountBreifs').doc(id).get();
+    return snap.data();
+  }
+
   Future<void> addAccountBreif(AccountBreif accountBreif) {
-    return _db.collection('accountBreifs').doc(accountBreif.email).set(accountBreif.toMap());
+    return _db
+        .collection('accountBreifs')
+        .doc(accountBreif.email)
+        .set(accountBreif.toMap());
   }
 
   Future<void> deleteAccountBreif(String id) {
