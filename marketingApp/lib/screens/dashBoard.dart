@@ -40,7 +40,7 @@ class DashBoardPage extends StatelessWidget {
                     snapshot.data()['role'] == "admin"
                         ? Navigator.push(context,
                             MaterialPageRoute(
-                                builder: (context) => AdminUser()))
+                                builder: (context) => AdminPage()))
                         : Text("you are not allowed to enter this page"));
               },
             ),

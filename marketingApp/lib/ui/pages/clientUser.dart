@@ -13,26 +13,30 @@ class ClientUser extends StatefulWidget {
 
 class _ClientUserState extends State<ClientUser> {
   AccountBreif accountBreif;
-
+  @override
+  void initState() {
+   
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+    print(accountBreif.email);
     return Scaffold(
       appBar: AppBar(
         title: Text('Account Breif'),
       ),
       body: FutureBuilder(
-        future: DataService().getOneAccountBreif(accountBreif.id),
-        builder: (BuildContext context,snapshot) {
-          print(snapshot);
+        future: DataService().getOneAccountBreif(accountBreif.email),
+        builder: (BuildContext context, snapshot) {
+          print(snapshot.data);
           if (snapshot.hasError || !snapshot.hasData)
-
             return Center(child: CircularProgressIndicator());
 
           return ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
+            itemBuilder: (BuildContext context, int index) {
               AccountBreif accountBreif = snapshot.data();
               return ListTile(
-                title: Text(accountBreif.name),                
+                title: Text(accountBreif.name),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
