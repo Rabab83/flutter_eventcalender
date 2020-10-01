@@ -7,6 +7,7 @@ import 'package:marketingApp/ui/pages/add_accountBreif.dart';
 
 //Displays names of account Breifs
 class ClientUser extends StatefulWidget {
+  AccountBreif accountBreif;
   @override
   _ClientUserState createState() => _ClientUserState();
 }
@@ -15,9 +16,9 @@ class _ClientUserState extends State<ClientUser> {
   AccountBreif accountBreif;
   @override
   void initState() {
-   
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     print(accountBreif.email);
