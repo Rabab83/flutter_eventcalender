@@ -3,6 +3,7 @@ import 'package:marketingApp/model/note.dart';
 import 'package:marketingApp/res/firestore_service.dart';
 import 'package:marketingApp/ui/pages/add_note.dart';
 import 'package:marketingApp/ui/pages/note_details.dart';
+import 'package:marketingApp/ui/pages/projectFolder.dart';
 
 //Displays names of Notes
 class AddingNotesPage extends StatelessWidget {
@@ -10,7 +11,7 @@ class AddingNotesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Note'),
+        title: Text('Project'),
       ),
       body: FutureBuilder(
         future: FirestoreService().getNotes(),
@@ -46,8 +47,7 @@ class AddingNotesPage extends StatelessWidget {
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => NoteDetailsPage(
-                      note: note,
+                    builder: (_) => ProjectFolder(                  
                     ),
                   ),
                 ),
