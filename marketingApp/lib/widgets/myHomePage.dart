@@ -1,38 +1,39 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:marketingApp/model/accountbrief.dart';
-import 'package:marketingApp/res/database.dart';
-import 'package:marketingApp/ui/pages/accountBreif_details.dart';
-import 'package:marketingApp/ui/pages/add_accountBreif.dart';
+import 'package:marketingApp/model/transaction.dart';
+import 'package:marketingApp/res/projectNames.dart';
+import 'package:marketingApp/widgets/new_transaction.dart';
+import 'package:marketingApp/widgets/transactionDetails.dart';
 
 //Displays names of account Breifs
-class ClientUser extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
   @override
-  _ClientUserState createState() => _ClientUserState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _ClientUserState extends State<ClientUser> {
-  AccountBreif accountBreif;
-
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Account Breif'),
+        title: Text(' Projects'),
       ),
       body: FutureBuilder(
-        future: DataService().getOneAccountBreif(accountBreif.id),
-        builder: (BuildContext context,snapshot) {
-          print(snapshot);
+        future: DataProjectService().getTransactions(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Transsaction>> snapshot) {
           if (snapshot.hasError || !snapshot.hasData)
-
-            return Center(child: CircularProgressIndicator());
-
+            return CircularProgressIndicator();
           return ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-              AccountBreif accountBreif = snapshot.data();
+            itemCount: snapshot.data.length,
+            itemBuilder: (BuildContext context, int index) {
+              Transsaction transaction = snapshot.data[index];
               return ListTile(
-                title: Text(accountBreif.name),                
+                title: Text(transaction.projectName == null
+                    ? "name is null"
+                    : transaction.projectName),
+                subtitle: Text(transaction.projectEmail == null
+                    ? "email is null"
+                    : transaction.projectEmail),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -42,22 +43,23 @@ class _ClientUserState extends State<ClientUser> {
                       onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => AddAccountBreifPage(),
+                            builder: (_) =>
+                                NewTransactionPage(transaction: transaction),
                           )),
                     ),
                     IconButton(
-                        color: Colors.red,
-                        icon: Icon(Icons.delete),
-                        onPressed: () {
-                          _deleteAccountBreif(context, accountBreif.id);
-                        }),
+                      color: Colors.red,
+                      icon: Icon(Icons.delete),
+                      onPressed: () =>
+                          _deleteTransaction(context, transaction.id),
+                    ),
                   ],
                 ),
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => AccountBreifDetailsPage(
-                      accountBreif: accountBreif,
+                    builder: (_) => NewTransactionDetailsPage(
+                      transsaction: transaction,
                     ),
                   ),
                 ),
@@ -70,16 +72,16 @@ class _ClientUserState extends State<ClientUser> {
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (_) => AddAccountBreifPage()));
+              MaterialPageRoute(builder: (_) => NewTransactionPage()));
         },
       ),
     );
   }
 
-  void _deleteAccountBreif(BuildContext context, String id) async {
+  void _deleteTransaction(BuildContext context, String id) async {
     if (await _showConfirmationDialog(context)) {
       try {
-        await DataService().deleteAccountBreif(id);
+        await DataProjectService().deleteTransaction(id);
       } catch (e) {
         print(e);
       }

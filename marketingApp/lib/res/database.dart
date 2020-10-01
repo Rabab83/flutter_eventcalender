@@ -18,8 +18,8 @@ class DataService {
         .toList();
   }
 
-  Future<Map<String,dynamic>> getOneAccountBreif(String id) async {
-    var snap = await _db.collection('accountBreifs').doc(id).get();
+  Future<dynamic> getOneAccountBreif(String id) async {
+    DocumentSnapshot snap = await _db.collection('accountBreifs').doc(id).get();
     return snap.data();
   }
 
@@ -41,3 +41,5 @@ class DataService {
         .update(accountBreif.toMap());
   }
 }
+
+

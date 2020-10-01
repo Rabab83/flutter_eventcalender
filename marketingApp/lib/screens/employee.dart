@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:marketingApp/widgets/myHomePage.dart';
 import '../widgets/raisedButton.dart';
 import 'calender.dart';
 
@@ -31,7 +32,7 @@ class _EmployeeState extends State<Employee> {
             children: <Widget>[
               Button(
                 text: Text('Employee'),
-                navigateTo: Calender(),
+                navigateTo: MyHomePage(),
                 color: Colors.pinkAccent,
                 textColor: Colors.black,
               ),
