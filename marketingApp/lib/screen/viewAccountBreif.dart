@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:marketingApp/model/classes.dart';
-import 'package:marketingApp/screens/addAccountBreif.dart';
+import 'package:marketingApp/screen/addAccountBreif.dart';
 import 'package:marketingApp/services/crudFunctions.dart';
+
 
 // Widget To view Account Breif
 //also, navigation to a form Brand File
@@ -97,7 +98,8 @@ class ViewAccountBreif extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (_) => AddAccountBreifPage(
-                                    aBid: aBid, accountBreif: accountBreif),
+                                    aBid: aBid,
+                                    accountBreif: accountBreif),
                               ),
                             ),
                           ),

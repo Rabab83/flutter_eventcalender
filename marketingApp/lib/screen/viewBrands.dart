@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:marketingApp/model/classes.dart';
 import 'package:marketingApp/screen/BrandFile.dart';
 import 'package:marketingApp/screen/addNewBrand.dart';
-
 import 'package:marketingApp/services/crudFunctions.dart';
+
 
 // Widget To view All Brands Names
 //also, navigation to form(AddNewBrandPage) that add new brand name via floating action button

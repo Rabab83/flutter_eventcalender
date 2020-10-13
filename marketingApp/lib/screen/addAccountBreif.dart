@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marketingApp/model/classes.dart';
 import 'package:marketingApp/services/crudFunctions.dart';
 
+
 // Form to add Account Breif to new Brands
 //viewAccountBreif navigate to this form
 

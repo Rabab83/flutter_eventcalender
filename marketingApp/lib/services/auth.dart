@@ -45,7 +45,6 @@ class Auth implements AuthBase {
     String email, String password) async {
     final authResult = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
-
     return _userFromFirebase(authResult.user);
   }
 

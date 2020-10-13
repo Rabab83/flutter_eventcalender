@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marketingApp/model/classes.dart';
 import 'package:marketingApp/services/crudFunctions.dart';
 
+
 // Form to add New Brand Name and Email
 //Navigation From ViewBrands
 class AddNewBrandPage extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marketingApp/screens/dashBoard.dart';
+import 'package:marketingApp/screen/dashBoard.dart';
 import 'package:marketingApp/services/auth.dart';
 
 class HomePage extends StatelessWidget {

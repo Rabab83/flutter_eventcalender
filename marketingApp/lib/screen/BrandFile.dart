@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marketingApp/screens/viewAccountBreif.dart';
+import 'package:marketingApp/screen/viewAccountBreif.dart';
 
 //Navigation From ViewBrands
 class BrandFile extends StatefulWidget {
