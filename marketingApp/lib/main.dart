@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:marketingApp/screens/add_event.dart';
 import 'package:marketingApp/services/auth.dart';
-import 'package:marketingApp/ui/pages/add_event.dart';
 import 'app/landing_page.dart';
 
 void main() async {

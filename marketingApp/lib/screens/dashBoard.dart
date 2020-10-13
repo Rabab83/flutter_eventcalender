@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:marketingApp/screens/employee.dart';
-import 'package:marketingApp/ui/pages/adminPage.dart';
-import 'package:marketingApp/ui/pages/adminUser.dart';
-import 'package:marketingApp/ui/pages/clientpage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:marketingApp/screens/adminPage.dart';
+
 
 class DashBoardPage extends StatelessWidget {
   FirebaseAuth fAuth = FirebaseAuth.instance;
@@ -19,7 +17,7 @@ class DashBoardPage extends StatelessWidget {
             // header
             new UserAccountsDrawerHeader(
               accountName: Text('Mammdouh'),
-              accountEmail: Text('Admin@gammal.tech'),
+              accountEmail: Text('Mammdouh@gmail.com'),
               currentAccountPicture: GestureDetector(
                 child: new CircleAvatar(
                   backgroundColor: Colors.grey,
@@ -32,39 +30,39 @@ class DashBoardPage extends StatelessWidget {
               decoration: new BoxDecoration(color: Colors.pink),
             ),
             ListTile(
-              title: Text('Admin page'),
+              title: Text('Manager page'),
               leading: Icon(Icons.home),
               onTap: () {
-                final userId = fAuth.currentUser.uid;
-                fStore.collection('users').doc(userId).get().then((snapshot) =>
-                    snapshot.data()['role'] == "admin"
-                        ? Navigator.push(context,
+                // final userId = fAuth.currentUser.uid;
+                // fStore.collection('users').doc(userId).get().then((snapshot) =>
+                //     snapshot.data()['role'] == "admin"?
+                         Navigator.push(context,
                             MaterialPageRoute(
-                                builder: (context) => AdminPage()))
-                        : Text("you are not allowed to enter this page"));
+                                builder: (context) => AdminPage()),);
+                        // : Text("you are not allowed to enter this page"));
               },
             ),
             ListTile(
               title: Text('Employee'),
               leading: Icon(Icons.work),
               onTap: () {
-                final userId = fAuth.currentUser.uid;
-                fStore.collection('users').doc(userId).get().then((snapshot) =>
-                    snapshot.data()['role'] == "employee"||snapshot.data()['role'] =="admin"
-                        ? Navigator.push(context,
-                            MaterialPageRoute(
-                                builder: (context) => Employee()))
-                        : Text("you are not allowed to enter this page"));
+                // final userId = fAuth.currentUser.uid;
+                // fStore.collection('users').doc(userId).get().then((snapshot) =>
+                //     snapshot.data()['role'] == "employee"||snapshot.data()['role'] =="admin"
+                //         ? Navigator.push(context,
+                //             MaterialPageRoute(
+                //                 builder: (context) => Employee()))
+                //         : Text("you are not allowed to enter this page"));
                       },
             ),
             ListTile(
               title: Text('Client'),
               leading: Icon(Icons.note),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ClientPage()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => ClientPage()),
+                // );
               },
             ),
 

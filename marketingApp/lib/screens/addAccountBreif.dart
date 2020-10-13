@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:marketingApp/model/accountbrief.dart';
-import 'package:marketingApp/res/database.dart';
+import 'package:marketingApp/model/classes.dart';
+import 'package:marketingApp/services/crudFunctions.dart';
+
+// Form to add Account Breif to new Brands
+//viewAccountBreif navigate to this form
 
 class AddAccountBreifPage extends StatefulWidget {
   final AccountBreif accountBreif;
-
-  const AddAccountBreifPage({Key key, this.accountBreif}) : super(key: key);
+  final String aBid;
+  const AddAccountBreifPage({Key key, this.accountBreif,this.aBid}) : super(key: key);
   @override
   _AddAccountBreifPageState createState() => _AddAccountBreifPageState();
 }
@@ -13,17 +16,18 @@ class AddAccountBreifPage extends StatefulWidget {
 class _AddAccountBreifPageState extends State<AddAccountBreifPage> {
   GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController _nameController;
-  TextEditingController _emailController;
-  FocusNode _emailNode;
+  TextEditingController _industryController;
+  FocusNode _industryNode;
 
   @override
   void initState() {
     super.initState();
     _nameController =
         TextEditingController(text: isEditMote ? widget.accountBreif.name : '');
-    _emailController = TextEditingController(
-        text: isEditMote ? widget.accountBreif.email : '');
-    _emailNode = FocusNode();
+    _industryController = TextEditingController(
+        text: isEditMote ? widget.accountBreif.industry : '');
+    _industryNode = FocusNode();
+    
   }
 
   get isEditMote => widget.accountBreif != null;
@@ -33,6 +37,7 @@ class _AddAccountBreifPageState extends State<AddAccountBreifPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(isEditMote ? 'Edit Account Breif' : 'Add Account Breif'),
+        // title: Text( 'Add Account Breif'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -44,7 +49,7 @@ class _AddAccountBreifPageState extends State<AddAccountBreifPage> {
               TextFormField(
                 textInputAction: TextInputAction.next,
                 onEditingComplete: () {
-                  FocusScope.of(context).requestFocus(_emailNode);
+                  FocusScope.of(context).requestFocus(_industryNode);
                 },
                 controller: _nameController,
                 validator: (value) {
@@ -59,16 +64,16 @@ class _AddAccountBreifPageState extends State<AddAccountBreifPage> {
               ),
               const SizedBox(height: 10.0),
               TextFormField(
-                focusNode: _emailNode,
-                controller: _emailController,
+                focusNode: _industryNode,
+                controller: _industryController,
                 validator: (value) {
                   if (value == null || value.isEmpty)
-                    return "Email cannot be empty";
+                    return "Industry cannot be empty";
                   return null;
                 },
                 maxLines: 2,
                 decoration: InputDecoration(
-                  labelText: "email",
+                  labelText: "Industry",
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -77,22 +82,24 @@ class _AddAccountBreifPageState extends State<AddAccountBreifPage> {
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 child: Text(isEditMote ? "Update" : "Save"),
+                // child: Text( "Save"),
                 onPressed: () async {
                   if (_key.currentState.validate()) {
                     try {
                       if (isEditMote) {
                         AccountBreif acccountBreif = AccountBreif(
-                          email: _emailController.text.trim(),
+                          industry: _industryController.text.trim(),
                           name: _nameController.text.trim(),
-                          id: widget.accountBreif.id,
+                          aBid: widget.aBid,
                         );
-                        await DataService().updateAccountBreif(acccountBreif);
+                        await NewAccountBreifDB().updateAccountBreif(acccountBreif);
                       } else {
                         AccountBreif acccountBreif = AccountBreif(
-                          email: _emailController.text.trim(),
+                          industry: _industryController.text.trim(),
                           name: _nameController.text.trim(),
+                          aBid: widget.aBid
                         );
-                        await DataService().addAccountBreif(acccountBreif);
+                        await NewAccountBreifDB().updateAccountBreif(acccountBreif);
                       }
                       Navigator.pop(context);
                     } catch (e) {

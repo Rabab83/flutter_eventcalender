@@ -1,7 +1,7 @@
+import 'package:marketingApp/screens/view_event.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:marketingApp/res/event_firestore_service.dart';
-import 'package:marketingApp/ui/pages/add_event.dart';
-import 'package:marketingApp/ui/pages/view_event.dart';
+
 import 'package:marketingApp/model/event.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
